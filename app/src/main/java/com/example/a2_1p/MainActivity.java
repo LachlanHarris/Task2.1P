@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton Distance;
     //declaring the choice variable for our drop down menu
     int choice = 0;
+    double number = 0;
+
 
     
 
@@ -66,68 +68,81 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //creating all the on click listeners for our three buttons
         //using an else bracket to send a toast for our error message if the user clicks the wrong button
+        //also using a try catch block to prevent the app from crashing when the user clicks a button without entering anything
         Distance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (choice == 0)
-                {
-                    Unit1.setText("Centimetre");
-                    Unit2.setText("Foot");
-                    Unit3.setText("Inch");
-                    double number = Double.parseDouble(numberForConversion.getText().toString());
-                    double Centimetre = number*100;
-                    double Foot = number/0.3048;
-                    double Inch = number/0.0254;
-                    Conversion1.setText(df.format(Centimetre));
-                    Conversion2.setText(df.format(Foot));
-                    Conversion3.setText(df.format(Inch));
+                try {
+                    if (choice == 0) {
+                        Unit1.setText("Centimetre");
+                        Unit2.setText("Foot");
+                        Unit3.setText("Inch");
+                        number = Double.parseDouble(numberForConversion.getText().toString());
+                        double Centimetre = number * 100;
+                        double Foot = number / 0.3048;
+                        double Inch = number / 0.0254;
+                        Conversion1.setText(df.format(Centimetre));
+                        Conversion2.setText(df.format(Foot));
+                        Conversion3.setText(df.format(Inch));
+                    } else {
+                        Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
+                catch (Exception NumberFormatException)
                 {
-                    Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         Temperature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (choice == 1)
-                {
-                    Unit1.setText("Fahrenheit");
-                    Unit2.setText("Kelvin");
-                    Unit3.setText("");
-                    double number = Double.parseDouble(numberForConversion.getText().toString());
-                    double Fahrenheit = (number*1.8)+32;
-                    double Kelvin = (number + 273.15);
-                    Conversion1.setText(df.format(Fahrenheit));
-                    Conversion2.setText(df.format(Kelvin));
-                    Conversion3.setText("");
+                try {
+                    if (choice == 1)
+                    {
+                        Unit1.setText("Fahrenheit");
+                        Unit2.setText("Kelvin");
+                        Unit3.setText("");
+                        number = Double.parseDouble(numberForConversion.getText().toString());
+                        double Fahrenheit = (number*1.8)+32;
+                        double Kelvin = (number + 273.15);
+                        Conversion1.setText(df.format(Fahrenheit));
+                        Conversion2.setText(df.format(Kelvin));
+                        Conversion3.setText("");
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
+                catch (Exception NumberFormatException)
                 {
-                    Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         Weight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (choice == 2)
-                {
-                    Unit1.setText("Grams");
-                    Unit2.setText("Ounce(Oz)");
-                    Unit3.setText("Pound(lb)");
-                    double number = Double.parseDouble(numberForConversion.getText().toString());
-                    double Grams = number*1000;
-                    double Ounce = number * 35.27396194958;
-                    double Pound = number * 2.2;
-                    Conversion1.setText(df.format(Grams));
-                    Conversion2.setText(df.format(Ounce));
-                    Conversion3.setText(df.format(Pound));
+                try {
+                    if (choice == 2)
+                    {
+                        Unit1.setText("Grams");
+                        Unit2.setText("Ounce(Oz)");
+                        Unit3.setText("Pound(lb)");
+                        number = Double.parseDouble(numberForConversion.getText().toString());
+                        double Grams = number*1000;
+                        double Ounce = number * 35.27396194958;
+                        double Pound = number * 2.2;
+                        Conversion1.setText(df.format(Grams));
+                        Conversion2.setText(df.format(Ounce));
+                        Conversion3.setText(df.format(Pound));
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
+                catch (Exception NumberFormatException)
                 {
-                    Toast.makeText(MainActivity.this, "Please select the correct conversion icon", Toast.LENGTH_SHORT).show();
                 }
             }
         });
